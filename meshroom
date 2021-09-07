@@ -1,0 +1,42 @@
+
+This notebook is based off of donmahallem's MeshroomColab notebook.
+
+If you need help, check out my YouTube and my GitHub.
+
+Setup
+Add paths for input and output. Your images should be in their own folder. Or just check use sample data, and the input and ouput will be covered for you. For ease of use, I recommend mounting your Google Drive (see section below), then setting your input and output locations to somewhere inside your drive.
+
+In [ ]:
+image_folder_path = "" #@param {type:"string"}
+output_path = "" #@param {type:"string"}
+use_sample_data = False #@param {type:"boolean"}
+Download Meshroom and sample data(if needed).
+
+In [ ]:
+if use_sample_data:
+  !git clone https://github.com/alicevision/dataset_buddha
+  image_folder_path = './dataset_buddha/buddha'
+  output_path = './buddha_out'
+
+!wget -N https://github.com/alicevision/meshroom/releases/download/v2019.1.0/Meshroom-2019.1.0-linux.tar.gz
+!mkdir meshroom
+!tar xzf Meshroom-2019.1.0-linux.tar.gz -C ./meshroom
+Google Drive
+Connect to Google Drive, so that you can import and export files from there.
+
+In [ ]:
+from google.colab import drive
+drive.mount('/content/drive')
+Go to this URL in a browser: https://accounts.google.com/o/oauth2/auth?client_id=947318989803-6bn6qk8qdgf4n4g3pfee6491hc0brc4i.apps.googleusercontent.com&redirect_uri=urn%3aietf%3awg%3aoauth%3a2.0%3aoob&scope=email%20https%3a%2f%2fwww.googleapis.com%2fauth%2fdocs.test%20https%3a%2f%2fwww.googleapis.com%2fauth%2fdrive%20https%3a%2f%2fwww.googleapis.com%2fauth%2fdrive.photos.readonly%20https%3a%2f%2fwww.googleapis.com%2fauth%2fpeopleapi.readonly&response_type=code
+
+Enter your authorization code:
+··········
+Mounted at /content/drive
+Meshing
+Use the form in setup to specify an input and output path, or check sample data to try it out.
+
+In [ ]:
+!mkdir '{output_path}'
+!./meshroom/Meshroom-2019.1.0/meshroom_photogrammetry --input '{image_folder_path}' --output '{output_path}'
+Download
+Now simply download the output folder from Google Drive!
